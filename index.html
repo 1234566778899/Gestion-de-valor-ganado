@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/estilos.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Gestión de valor ganado</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <br>
+            <h1>GESTIÓN DE VALOR GANADO</h1>
+            <hr>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <td>MEDIDAS DEDESEMPEÑO BÁSICAS</td>
+                        <td>MEDIDAS DEVARIACIÓN</td>
+                        <td>ÍNDICES DE DESEMPEÑO </td>
+                        <td>PRONÓSTICOS</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td><input type="text" class="entrada" placeholder="PV"
+                                id="pv-entrada" oninput="calcular()">
+                        </td>
+                        <td>SV = EV - PV<span id="sv-result">= 0</span>
+                            <div class="card-inf">
+                                VALOR DEL
+                                CRONOGRAMA (Schedule Variation)
+                            </div>
+                        </td>
+                        <td>SPI = EV / PV<span id="spi-result">= 0</span>
+                            <div class="card-inf">
+                                ÍNDICE DE DESEMPEÑO
+                                DEL CRONOGRAMA (Schedule Performance Index )
+
+                            </div>
+                        </td>
+                        <td><input type="text" placeholder="EAC"
+                                id="eac-entrada" class="entrada"
+                                oninput="calcular()">
+                            <div class="card-inf">
+                                ESTIMACIÓN A LA
+                                CONCLUSIÓN (Estimate at Completion )
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>
+
+                            <input type="text"
+                                class="entrada ev-entrada"
+                                placeholder="EV" id="ev-entrada"
+                                oninput="calcular()">
+                            <div class="box-ev-boton">
+                                <i class="fa-solid fa-calculator ev-boton"
+                                    onclick="openBoxEV(true)"></i>
+                            </div>
+
+                            <div class="box-ev text-center">
+                                <i class="fa-solid fa-rectangle-xmark"
+                                    onclick="openBoxEV(false)"></i>
+                                <div class="mt-4">
+                                    <input type="text" placeholder="% de avance"
+                                        id="porcentaje">
+                                    x <input type="text" placeholder="PV Total"
+                                        id="pv-total">
+                                    <button class="mt-2" onclick="calcularEV()">Aceptar</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>CV = EV - AC <span id="cv-result">= 0</span>
+                            <div class="card-inf">
+                                VARIACIÓN DEL
+                                COSTO (Cost Variation )
+                            </div>
+                        </td>
+                        <td>CPI = EV / AC<span id="cpi-result">= 0</span>
+                            <div class="card-inf">
+                                INDICE DE DESEMPEÑO DE COSTOS (Cost Performance
+                                Index )
+                            </div>
+                        </td>
+                        <td>ETC = EAC- AC<span id="etc-result">= 0</span>
+                            <div class="card-inf">
+                                ESTIMACION HASTA LA
+                                CONCLUSIÓN (Estimate to Complete )
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td> <input type="text" class="entrada" placeholder="AC"
+                                id="ac-entrada" oninput="calcular()"></td>
+                        <td></td>
+                        <td></td>
+                        <td>VAC = BAC - EAC<span id="vac-result">= 0</span>
+                            <div class="card-inf">
+                                VARIACIÓN A LA
+                                CONCLUSIÓN (Variation at Completion )
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td> <input type="text" class="entrada"
+                                placeholder="BAC" id="bac-entrada"
+                                oninput="calcular()"></td>
+                        <td></td>
+                        <td></td>
+                        <td>TCPI = (BAC – EV )/(BAC – AC)<span id="tcpi-result">=
+                                0</span>
+                            <div class="card-inf">
+                                ÍNDICE DE DESEMPEÑO
+                                DEL TRABAJO POR
+                                COMPLETAR (To Complete Performance Index)
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script src="./scripts/main.js"></script>
+    </body>
+
+</html>
